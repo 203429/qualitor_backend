@@ -44,3 +44,5 @@
     ```bash
     python manage.py runserver 
     ```
+
+8. Si todo salio bien, dirigirse a `localhost:8000/admin` para verificar la instalación.
