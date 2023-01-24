@@ -19,7 +19,7 @@
     pip install -r requirements.txt
     ```
 
-5. Crear una carpeta para las credenciales al nivel de archivo manage.py):
+5. Crear una carpeta para las credenciales al nivel de archivo manage.py:
     > **IMPORTANTE LLAMAR AL ARCHIVO COMO ".keys"**
     ```bash
     touch .keys
