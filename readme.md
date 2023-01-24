@@ -1,5 +1,8 @@
 # Instrucciones para la instalación y ambientación:
 1. Clonar el repositorio
+    ```bash
+    git clone https://github.com/203429/qualitor_backend.git
+    ```
 
 2. Crear su entorno virtual:
     ```bash
