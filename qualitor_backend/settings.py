@@ -169,9 +169,9 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'user.serializers.CustomRegisterSerializer'
-}
+# REST_AUTH_REGISTER_SERIALIZERS = {
+#     'REGISTER_SERIALIZER': 'user.serializers.CustomRegisterSerializer'
+# }
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'user.serializers.CustomUserDetailsSerializer'
