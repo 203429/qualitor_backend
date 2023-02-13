@@ -12,6 +12,7 @@ class Proceso(models.Model):
     participantes = ArrayField(models.CharField(max_length=100))
     proceso_relacionado = models.CharField(max_length=100)
     frecuencia = models.CharField(max_length=100)
+    status = models.BooleanField(null=True)
 
     def __str__(self):
         return f'{self.id} Proceso'
