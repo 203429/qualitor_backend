@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'proceso',
     'role',
     'user',
+    'manual',
 
     # REST API
     'rest_framework',
