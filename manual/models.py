@@ -4,7 +4,6 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 class ManualModel(models.Model):
-    id_manual = models.CharField(max_length=50)
     historia=models.CharField(max_length=300)
     alcance = models.CharField(max_length=300)
     vision = models.CharField(max_length=300)
