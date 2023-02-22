@@ -52,3 +52,12 @@ class ProcesoDetail(APIView):
             idResponse = ProcesoCreateUpdateSerializer(idResponse)
             return Response(self.custom_response("Success", idResponse.data, status=status.HTTP_200_OK))
         return Response(self.custom_response("Error", "serializer.errors", status=status.HTTP_400_BAD_REQUEST))
+    
+    def patch(self, request, pk, format = None):
+        id_response = self.get_object(pk)
+        serializer = ProcesoCreateUpdateSerializer(id_response, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            datas = serializer.data
+            return Response(datas, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
