@@ -13,4 +13,5 @@ class ManualModel(models.Model):
     vocabulario = models.FileField(upload_to = 'resources',  blank = True, null=True)
     funciones_puestos = models.FileField(upload_to = 'resources',  blank = True, null=True)
     politicas = ArrayField(models.CharField(max_length=150))
+    id_proyecto = models.IntegerField()
     

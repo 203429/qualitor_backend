@@ -4,4 +4,4 @@ from manual.models import ManualModel
 class ManualSerializer(serializers.ModelSerializer):
     class Meta:
         model = ManualModel
-        fields = ('__all__')
+        fields = 'historia', 'alcance', 'vision', 'mision', 'organizacion_empresa', 'organigrama', 'vocabulario', 'funciones_puestos', 'politicas'
