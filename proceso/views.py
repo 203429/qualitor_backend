@@ -13,6 +13,15 @@ class ProcesoCreateUpdateViewSet(viewsets.ModelViewSet):
 
     queryset = Proceso.objects.all()
 
+class CrearProceso(APIView):
+    serializer_class = ProcesoCreateUpdateSerializer
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class ProcesoList(APIView):
     def custom_response(self, msg, response, status):
         data ={
