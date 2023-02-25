@@ -1,16 +1,19 @@
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import json
+from .serializers import ProcesoCreateUpdateSerializer
+from .models import Proceso
 
-#Importaciones de modelos
-from proceso.models import ProcesoModel
+class ProcesoCreateUpdateViewSet(viewsets.ModelViewSet):
+    serializer_class = ProcesoCreateUpdateSerializer
 
-#Importaciones de serializadores
-from proceso.serializers import ProcesoSerializer
+    http_method_names = ['post','delete','put','patch', 'head']
 
-# Create your views here.
-class ProcesoView(APIView):
+    queryset = Proceso.objects.all()
+
+class ProcesoList(APIView):
     def custom_response(self, msg, response, status):
         data ={
             "messages": msg,
@@ -20,17 +23,12 @@ class ProcesoView(APIView):
         res= json.dumps(data)
         response = json.loads(res)
         return response
-    def get(self,request):
-        queryset=ProcesoModel.objects.all()
-        serializer=ProcesoSerializer(queryset,many=True,context={'request':request})
-        return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
-    def post(self, request):
-        serializer = ProcesoSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(self.custom_response("Success", serializer.data, status=status.HTTP_201_CREATED))
-        return Response(self.custom_response("Error", serializer.errors, status=status.HTTP_400_BAD_REQUEST))
 
+    def get(self,request,format=None):
+        queryset=Proceso.objects.all()
+        serializer = ProcesoCreateUpdateSerializer(queryset,many=True,context={'request':request})
+        return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
+    
 class ProcesoDetail(APIView):
     def custom_response(self, msg, response, status):
         data ={
@@ -44,13 +42,13 @@ class ProcesoDetail(APIView):
 
     def get_object(self, pk):
         try:
-            return ProcesoModel.objects.get(pk = pk)  
-        except ProcesoModel.DoesNotExist:   
+            return Proceso.objects.get(pk = pk)  
+        except Proceso.DoesNotExist:   
             return 0
 
     def get(self, request, pk, format=None):
-        id_response = self.get_object(pk)
-        if id_response != 0:
-            id_response = ProcesoSerializer(id_response)
-            return Response(self.custom_response("Success", id_response.data, status=status.HTTP_200_OK))
-        return Response(self.custom_response("Error", f"Proceso with id: {pk} not found", status=status.HTTP_400_BAD_REQUEST))
+        idResponse = self.get_object(pk)
+        if idResponse != 0:
+            idResponse = ProcesoCreateUpdateSerializer(idResponse)
+            return Response(self.custom_response("Success", idResponse.data, status=status.HTTP_200_OK))
+        return Response(self.custom_response("Error", "serializer.errors", status=status.HTTP_400_BAD_REQUEST))
