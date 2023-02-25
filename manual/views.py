@@ -33,7 +33,7 @@ class ManualView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(self.custom_response("Success", serializer.data, status=status.HTTP_201_CREATED))
-        return Response(self.custom_response("Error", serializer.errors, status=status.HTTP_400_BAD_REQUEST))
+        return Response(self.custom_response("Error", serializer.errors, status=status.HTTP_400_BAD_REQUEST),status=status.HTTP_400_BAD_REQUEST)
 
 
 class ManualDetail(APIView):

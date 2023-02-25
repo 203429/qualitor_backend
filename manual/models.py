@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from proyectos.models import ProyectosModel
 
 # Create your models here.
 
@@ -13,5 +14,5 @@ class ManualModel(models.Model):
     vocabulario = models.FileField(upload_to = 'resources',  blank = True, null=True)
     funciones_puestos = models.FileField(upload_to = 'resources',  blank = True, null=True)
     politicas = ArrayField(models.CharField(max_length=150))
-    id_proyecto = models.IntegerField()
+    proyecto = models.ForeignKey(ProyectosModel, on_delete=models.CASCADE, null=False, blank=False, related_name='proyecto')
     
