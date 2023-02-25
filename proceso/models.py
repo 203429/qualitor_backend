@@ -9,7 +9,7 @@ class Proceso(models.Model):
     descripcion = ArrayField(models.TextField(blank=True), null=True)
     responsable = models.CharField(max_length=100, null=True)
     categoria = models.CharField(max_length=50, null=True)
-    participantes = ArrayField(models.CharField(max_length=100), null=True)
+    participantes = ArrayField(models.CharField(max_length=100), null=True, blank=True)
     proceso_relacionado = models.CharField(max_length=100, null=True)
     frecuencia = models.CharField(max_length=100, null=True)
     status = models.BooleanField(null=True)
