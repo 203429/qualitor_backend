@@ -28,3 +28,15 @@ class ProcesoCreateUpdateSerializer(serializers.ModelSerializer):
         if 'proceso_media'not in validated_data:
             proceso_instance = Proceso.objects.create(**validated_data)
             return proceso_instance
+        
+    def update(self, instance, validated_data):
+        proceso_media_data = validated_data.pop('proceso_media', [])
+
+        # Update fields of the main instance
+        instance = super().update(instance, validated_data)
+
+        # Update fields of the related instances
+        for media_data in proceso_media_data:
+            Proceso_Media.objects.update_or_create(proceso=instance, **media_data)
+
+        return instance
