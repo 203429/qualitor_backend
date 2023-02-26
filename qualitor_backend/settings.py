@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'proceso',
     'role',
     'user',
+    'manual',
     'proyectos',
     'phases',
 
