@@ -13,6 +13,15 @@ class ProcesoCreateUpdateViewSet(viewsets.ModelViewSet):
 
     queryset = Proceso.objects.all()
 
+class CrearProceso(APIView):
+    serializer_class = ProcesoCreateUpdateSerializer
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class ProcesoList(APIView):
     def custom_response(self, msg, response, status):
         data ={
@@ -52,3 +61,12 @@ class ProcesoDetail(APIView):
             idResponse = ProcesoCreateUpdateSerializer(idResponse)
             return Response(self.custom_response("Success", idResponse.data, status=status.HTTP_200_OK))
         return Response(self.custom_response("Error", "serializer.errors", status=status.HTTP_400_BAD_REQUEST))
+    
+    def patch(self, request, pk, format = None):
+        id_response = self.get_object(pk)
+        serializer = ProcesoCreateUpdateSerializer(id_response, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            datas = serializer.data
+            return Response(datas, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
