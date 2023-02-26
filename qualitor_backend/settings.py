@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'role',
     'user',
     'proyectos',
+    'phases',
 
     # REST API
     'rest_framework',
