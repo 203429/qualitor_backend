@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 import os
@@ -169,6 +170,10 @@ REST_FRAMEWORK = {
 }
 
 REST_USE_JWT = True
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7)
+}
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
