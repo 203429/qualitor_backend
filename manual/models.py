@@ -14,5 +14,5 @@ class ManualModel(models.Model):
     vocabulario = models.FileField(upload_to = 'resources',  blank = True, null=True)
     funciones_puestos = models.FileField(upload_to = 'resources',  blank = True, null=True)
     politicas = ArrayField(models.CharField(max_length=150))
-    id_proyecto = models.ForeignKey(ProyectosModel, on_delete=models.CASCADE, null=False, blank=False, related_name='proyecto')
+    proyecto = models.ForeignKey(ProyectosModel, on_delete=models.CASCADE, null=False, blank=False, related_name='proyecto')
     
