@@ -14,6 +14,9 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password2': self.validated_data.get('password2', ''),
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', ''),
+            'id_role': self.validate_data.get('role', ''),
+            'is_superuser': self.validate_data.get('isSuperUser', ''),
+            'id_project': self.validate_data.get('idProject', ''),
         }
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
