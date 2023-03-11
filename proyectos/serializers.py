@@ -6,5 +6,5 @@ class ProyectosSerializer(serializers.ModelSerializer):
     phases_list = PhaseCreateUpdateSerializer(many=True, read_only=True)
     class Meta:
         model = ProyectosModel
-        fields = ('__all__')
+        fields = ('id','name','phases_list')
 

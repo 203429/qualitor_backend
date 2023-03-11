@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
+from phases.models import Phase
+
 class Proceso(models.Model):
     nombre = models.CharField(max_length=50, null=True)
-    id_proceso = models.IntegerField(null=True)
+    id_fase = models.ForeignKey(Phase, on_delete=models.CASCADE, null=True, related_name = 'process_list', related_query_name = 'process_list')
+    # id_proceso = models.IntegerField(null=True)
     proposito=models.CharField(max_length=300, null=True)
     objetivo = ArrayField(models.TextField(blank=True), null=True)
     descripcion = ArrayField(models.TextField(blank=True), null=True)
