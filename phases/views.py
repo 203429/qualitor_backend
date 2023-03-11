@@ -38,6 +38,22 @@ class PhaseList(APIView):
         serializer = PhaseCreateUpdateSerializer(queryset,many=True,context={'request':request})
         return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
     
+class PhasePerProject(APIView):
+    def custom_response(self, msg, response, status):
+        data ={
+            "messages": msg,
+            "pay_load": response,
+            "status": status,
+        }
+        res= json.dumps(data)
+        response = json.loads(res)
+        return response
+
+    def get(self, request, id_proyecto, format=None):
+        queryset = Phase.objects.filter(id_proyecto=id_proyecto)
+        serializer = PhaseCreateUpdateSerializer(queryset, many=True, context={'request': request})
+        return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
+    
 class PhaseDetail(APIView):
     def custom_response(self, msg, response, status):
         data ={
