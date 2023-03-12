@@ -26,9 +26,8 @@ class UserList(APIView):
 
     def get(self,request,format=None):
         queryset=CustomUser.objects.all()
-        print(queryset)
-        # serializer = ProcesoCreateUpdateSerializer(queryset,many=True,context={'request':request})
-        return Response(self.custom_response("Success", queryset, status=status.HTTP_200_OK))
+        serializer = CustomUserDetailsSerializer(queryset,many=True,context={'request':request})
+        return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
     
 class UserListDetail(APIView):
     def custom_response(self, msg, response, status):
