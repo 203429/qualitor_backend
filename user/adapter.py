@@ -6,6 +6,5 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         data = form.cleaned_data
         user.id_role = data.get('id_role')
         user.id_project = data.get('id_project')
-        user.is_superuser = data.get('is_superuser')
         user.save()
         return user
