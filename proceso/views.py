@@ -38,6 +38,22 @@ class ProcesoList(APIView):
         serializer = ProcesoCreateUpdateSerializer(queryset,many=True,context={'request':request})
         return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
     
+class ProcesoPerPhase(APIView):
+    def custom_response(self, msg, response, status):
+        data ={
+            "messages": msg,
+            "pay_load": response,
+            "status": status,
+        }
+        res= json.dumps(data)
+        response = json.loads(res)
+        return response
+
+    def get(self, request, id_fase, format=None):
+        queryset=Proceso.objects.filter(id_fase=id_fase)
+        serializer = ProcesoCreateUpdateSerializer(queryset, many=True, context={'request': request})
+        return Response(self.custom_response("Success", serializer.data, status=status.HTTP_200_OK))
+    
 class ProcesoDetail(APIView):
     def custom_response(self, msg, response, status):
         data ={
