@@ -8,17 +8,32 @@ from role.models import RoleModel
 class CustomRegisterSerializer(RegisterSerializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    id_role = serializers.IntegerField()
-    id_project = serializers.IntegerField()
+    id_role = serializers.ListField()
+    id_project = serializers.ListField()
 
     def get_cleaned_data(self):
         super(CustomRegisterSerializer, self).get_cleaned_data()
-        try:
-            role = RoleModel.objects.get(id=self.validated_data.get('id_role'))
-            project = ProyectosModel.objects.get(id=self.validated_data.get('id_project'))
-        except RoleModel.DoesNotExist:
-            role = None
-            project = None
+        
+        projects=self.validated_data.get('id_project')
+        list_projects=[]
+        for id_aux in projects:
+            try:
+                project = ProyectosModel.objects.get(id=id_aux)
+                list_projects.append(project)
+            except RoleModel.DoesNotExist:
+                print(f'El proyecto con id:{id_aux} no existe')
+        
+        
+        roles=self.validated_data.get('id_role')
+        list_roles=[]
+        for id_aux in roles:
+            try:
+                role = RoleModel.objects.get(id=id_aux)
+                list_roles.append(role)
+            except RoleModel.DoesNotExist:
+                print(f'El rol con id:{id_aux} no existe')
+                
+
         return {
             'username': self.validated_data.get('username', ''),
             'password1': self.validated_data.get('password1', ''),
@@ -26,8 +41,8 @@ class CustomRegisterSerializer(RegisterSerializer):
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', ''),
             'email': self.validated_data.get('email', ''),
-            'id_role': role,
-            'id_project': project,
+            'id_role': list_roles,
+            'id_project': list_projects,
         }
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
