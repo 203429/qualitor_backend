@@ -43,18 +43,18 @@ class ProyectoDetail(APIView):
         response = json.loads(res)
         return response
 
-    def get_object(self, id_users):
+    def get_object(self, pk):
         try:
-            return ProyectosModel.objects.get(pk = id_users)  
+            return ProyectosModel.objects.get(pk = pk)  
         except ProyectosModel.DoesNotExist:   
             return 0
 
-    def get(self, request, id_users, format=None):
-        id_response = self.get_object(id_users)
-        if id_response != 0:
-            id_response = ProyectosSerializer(id_response)
-            return Response(self.custom_response("Success", id_response.data, status=status.HTTP_200_OK))
-        return Response(self.custom_response("Error", f"Proyecto with id: {id_users} not found", status=status.HTTP_400_BAD_REQUEST))
+    def get(self, request, pk, format=None):
+        idResponse = self.get_object(pk)
+        if idResponse != 0:
+            idResponse = ProyectosSerializer(idResponse)
+            return Response(self.custom_response("Success", idResponse.data, status=status.HTTP_200_OK))
+        return Response(self.custom_response("Error", "serializer.errors", status=status.HTTP_400_BAD_REQUEST))
 
 class CrearProyecto(APIView):
     serializer_class = ProyectosSerializer
