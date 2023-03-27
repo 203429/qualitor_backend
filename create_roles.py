@@ -9,7 +9,7 @@ from role.models import RoleModel
 
 def generate_roles():
     roles = ["Gestor de calidad", "Scrum master", "Product owner", "Analista de requerimientos", "Analista/tester", "Arquitecto de software", "Jefe de programacion",
-            "DevOps", "Programador backend", "Programador Frontend", "Programador Fullstack", "Jefe de programacion"]
+            "DevOps", "Programador backend", "Programador Frontend", "Programador Fullstack"]
     
     for role in roles:
         RoleModel.objects.create(
