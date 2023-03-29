@@ -86,3 +86,10 @@ class ProcesoDetail(APIView):
             datas = serializer.data
             return Response(datas, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk, format = None):
+        objetive = self.get_object(pk)
+        if objetive != 0:
+            objetive.delete()
+            return Response(self.custom_response("Success", "Deleted", status=status.HTTP_200_OK))
+        return Response(self.custom_response("Error", "Not found", status=status.HTTP_404_NOT_FOUND))
