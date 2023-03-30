@@ -1,8 +1,12 @@
+#archivos en DB
+resources/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+proceso_media/
 # C extensions
 *.so
 

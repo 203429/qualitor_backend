@@ -1,3 +1,7 @@
+# Endpoints
+> **Documentar las direcciones de las vistas de cada modulo**
+https://docs.google.com/document/d/1U8-JUc48rbYFS7Rh8_JmikJSSDd0gZiaQRBrVwf2n6M/edit?usp=sharing
+
 # Instrucciones para la instalación y ambientación:
 1. Clonar el repositorio
     ```bash
