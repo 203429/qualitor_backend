@@ -28,5 +28,5 @@ urlpatterns = [
     path('api/v1/manual/', include('manual.urls')),
     path('api/v1/proyectos/', include('proyectos.urls')),
     path('api/v1/fases/', include('phases.urls')),
-    path('proceso_media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
+    path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
